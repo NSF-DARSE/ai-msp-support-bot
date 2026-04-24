@@ -1,0 +1,11 @@
+﻿.venv/
+__pycache__/
+*.pyc
+.env
+local.settings.json
+.python_packages/
+wwwroot/
+*.log
+.funcignore
+azure-cli-2.85.0.msi
+README.md
