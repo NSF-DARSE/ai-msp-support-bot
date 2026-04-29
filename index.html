@@ -110,15 +110,24 @@
         .conf-bar{flex:1;min-width:50px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
         .conf-fill{height:100%;background:linear-gradient(90deg,var(--blue),#8b5cf6);transition:width 0.6s ease;}
         .meta-text{font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-        .badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
-        .badge.autotask{background:#1e3a6e;color:#93c5fd;}
-        .badge.openai{background:#1a4032;color:var(--green);}
-        .badge.fallback{background:#3a2010;color:var(--orange);}
-        .ticket-ref{margin-top:10px;padding:10px 12px;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.2);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;font-family:'JetBrains Mono',monospace;}
-        .ticket-ref-label{color:#93c5fd;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
-        .ticket-ref-id{color:var(--blue-light);font-weight:700;font-size:12px;}
-        .ticket-ref-title{color:var(--text-muted);font-size:10px;margin-top:2px;}
-        .ticket-ref-hint{color:#475569;font-size:9px;margin-top:4px;}
+        .badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono',monospace;letter-spacing:0.5px;}
+        .badge.autotask{background:#1e3a6e;color:#93c5fd;border:1px solid #2a5298;}
+        .badge.openai{background:#1a4032;color:#34d399;border:1px solid #166534;}
+        .badge.fallback{background:#3a2010;color:var(--orange);border:1px solid #92400e;}
+        .badge.no_match{background:#2d1b69;color:#a78bfa;border:1px solid #4c1d95;}
+
+        /* ── Source Banner ───────────────────────────── */
+        .source-banner{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;margin-bottom:8px;font-size:12px;font-weight:500;}
+        .source-banner.autotask{background:rgba(30,58,110,0.3);border:1px solid rgba(42,82,152,0.4);color:#93c5fd;}
+        .source-banner.openai{background:rgba(26,64,50,0.3);border:1px solid rgba(22,101,52,0.4);color:#34d399;}
+        .source-banner-icon{font-size:14px;}
+        .source-banner-text{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.3px;}
+        .source-banner-sub{font-size:10px;opacity:0.7;font-family:'Outfit',sans-serif;font-weight:400;}
+
+
+
+
+
 
         /* Typing */
         .typing-indicator{display:flex;gap:8px;}
@@ -184,6 +193,79 @@
         .info-steps li{font-size:13px;color:var(--text-muted);padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
         .info-steps li:last-child{border-bottom:none;}
         .info-num{width:22px;height:22px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+
+        /* ── Ticket Detail Modal ──────────────────── */
+        #ticketDetailPanel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:20px;}
+        #ticketDetailPanel.open{display:flex !important;}
+        .ticket-detail-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:540px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;animation:slideUp 0.3s ease;box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+        .ticket-detail-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;background:var(--surface2);}
+        .ticket-detail-header h3{font-size:14px;font-weight:600;color:var(--blue-light);}
+        .ticket-detail-close{background:transparent;border:1px solid var(--border);color:var(--text-muted);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+        .ticket-detail-close:hover{background:var(--surface3);color:var(--text);}
+        .ticket-detail-body{padding:20px;overflow-y:auto;flex:1;}
+        .ticket-detail-id{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--blue);font-weight:700;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;}
+        .ticket-detail-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:20px;line-height:1.4;}
+        .ticket-detail-section-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;font-family:'JetBrains Mono',monospace;}
+        .ticket-detail-resolution{font-size:13px;color:var(--text-dim);line-height:1.8;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:14px 16px;white-space:pre-wrap;}
+        .ticket-detail-empty{font-size:13px;color:var(--text-muted);font-style:italic;}
+
+        /* ── Related Ticket Cards ────────────────── */
+        .related-tickets-outer{margin-top:8px;margin-left:44px;max-width:calc(100% - 44px);}
+        @media(max-width:480px){.related-tickets-outer{margin-left:38px;max-width:calc(100% - 38px);}}
+        .related-tickets-label{font-size:13px;color:var(--text-dim);margin-bottom:10px;font-weight:500;}
+        .related-tickets-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+        .related-tickets-scroll::-webkit-scrollbar{height:3px;}
+        .related-tickets-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+        .related-ticket-card{flex-shrink:0;width:160px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px;transition:all 0.2s;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:6px;}
+        .related-ticket-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#6366f1,#8b5cf6);}
+        .related-ticket-card:hover{border-color:#6366f1;transform:translateY(-2px);box-shadow:0 6px 20px rgba(99,102,241,0.2);}
+        .related-ticket-card-id{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue-light);font-weight:700;}
+        .related-ticket-card-title{font-size:11px;color:var(--text);line-height:1.45;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+        .related-ticket-card-btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;border:none;border-radius:6px;padding:6px 14px;font-size:11px;font-family:'Outfit',sans-serif;font-weight:700;cursor:pointer;margin-top:4px;transition:all 0.2s;box-shadow:0 3px 10px rgba(99,102,241,0.4);letter-spacing:0.3px;width:100%;}
+        .related-ticket-card-btn:hover{background:linear-gradient(135deg,#4f46e5,#7c3aed);transform:translateY(-1px);box-shadow:0 5px 15px rgba(99,102,241,0.6);}
+        .related-ticket-card-btn:active{transform:scale(0.97);}
+        /* ── No Match / OpenAI Button ────────────── */
+        .no-match-box{
+            margin-top:14px;
+            padding:16px 18px;
+            background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(139,92,246,0.06));
+            border:1px solid rgba(99,102,241,0.3);
+            border-left:3px solid #6366f1;
+            border-radius:0 12px 12px 0;
+            display:flex;flex-direction:column;gap:14px;
+        }
+        .no-match-icon{font-size:22px;margin-bottom:2px;}
+        .no-match-text{font-size:13px;color:var(--text-dim);line-height:1.7;}
+        .no-match-text strong{color:var(--text);font-size:14px;display:block;margin-bottom:4px;}
+        .no-match-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+        .openai-btn{
+            display:flex;align-items:center;gap:8px;
+            background:linear-gradient(135deg,#6366f1,#8b5cf6);
+            border:none;color:white;
+            padding:10px 22px;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:13px;font-family:'Outfit',sans-serif;font-weight:700;
+            transition:all 0.25s;
+            white-space:nowrap;
+            box-shadow:0 4px 16px rgba(99,102,241,0.45);
+            letter-spacing:0.3px;
+        }
+        .openai-btn:hover{
+            background:linear-gradient(135deg,#4f46e5,#7c3aed);
+            transform:translateY(-2px);
+            box-shadow:0 8px 24px rgba(99,102,241,0.55);
+        }
+        .openai-btn:active{transform:scale(0.97);}
+        .openai-btn:disabled{
+            opacity:0.5;cursor:not-allowed;
+            transform:none;box-shadow:none;
+        }
+        .openai-btn-loading{
+            font-size:11px;color:#a78bfa;
+            font-family:'JetBrains Mono',monospace;
+            display:flex;align-items:center;gap:6px;
+        }
     </style>
 </head>
 <body>
@@ -199,7 +281,7 @@
     <div class="header-right">
         <div class="status-pill"><div class="status-dot"></div><span>Live</span></div>
         <button class="nav-btn" onclick="openInfo()">ℹ️ Help</button>
-        <button class="nav-btn" onclick="openTickets()">📋 Tickets</button>
+        <button class="nav-btn" onclick="openTicketsPanel()" style="background:linear-gradient(135deg,#1e3a6e,#1a4032);border-color:#2a5298;color:#93c5fd;">📋 Tickets</button>
         <button class="sidebar-toggle" onclick="openMobile()">☰</button>
     </div>
 </header>
@@ -216,9 +298,8 @@
         <div class="conv-empty">No conversations yet.<br>Start chatting!</div>
     </div>
     <div class="sidebar-bottom">
-        <div class="sidebar-stat"><span class="sidebar-stat-label">Total Tickets</span><span class="sidebar-stat-value" id="mStatTotal">—</span></div>
-        <div class="sidebar-stat"><span class="sidebar-stat-label">With Resolution</span><span class="sidebar-stat-value" id="mStatResolved">—</span></div>
-        <div class="sidebar-stat"><span class="sidebar-stat-label">Last Synced</span><span class="sidebar-stat-value" id="mStatSync" style="font-size:10px">—</span></div>
+        <div class="sidebar-stat"><span class="sidebar-stat-label">🎫 Tickets</span><span class="sidebar-stat-value" id="mStatTotal">—</span></div>
+        <div class="sidebar-stat"><span class="sidebar-stat-label">✅ Resolved</span><span class="sidebar-stat-value" id="mStatResolved">—</span></div>
     </div>
 </div>
 
@@ -232,9 +313,9 @@
                 <div class="conv-empty">No conversations yet.<br>Start chatting!</div>
             </div>
             <div class="sidebar-bottom">
-                <div class="sidebar-stat"><span class="sidebar-stat-label">Total Tickets</span><span class="sidebar-stat-value" id="statTotal">—</span></div>
-                <div class="sidebar-stat"><span class="sidebar-stat-label">With Resolution</span><span class="sidebar-stat-value" id="statResolved">—</span></div>
-                <div class="sidebar-stat"><span class="sidebar-stat-label">Last Synced</span><span class="sidebar-stat-value" id="statSync" style="font-size:10px">—</span></div>
+                <div class="sidebar-stat"><span class="sidebar-stat-label">🎫 Total Tickets</span><span class="sidebar-stat-value" id="statTotal">—</span></div>
+                <div class="sidebar-stat"><span class="sidebar-stat-label">✅ With Resolution</span><span class="sidebar-stat-value" id="statResolved">—</span></div>
+                <div class="sidebar-stat"><span class="sidebar-stat-label">🔄 Last Synced</span><span class="sidebar-stat-value" id="statSync" style="font-size:9px">—</span></div>
             </div>
         </div>
     </div>
@@ -266,12 +347,13 @@
 </div>
 
 
+
 <!-- Ticket Detail Modal -->
 <div id="ticketDetailPanel">
     <div class="ticket-detail-modal">
         <div class="ticket-detail-header">
             <h3>📋 Ticket Details</h3>
-            <button class="ticket-detail-close" onclick="closeTicketDetail()">✕ Close</button>
+            <button class="ticket-detail-close" onclick="closeTicketDetail()">✕</button>
         </div>
         <div class="ticket-detail-body">
             <div class="ticket-detail-id" id="detailTicketId"></div>
@@ -282,26 +364,7 @@
     </div>
 </div>
 
-<!-- Ticket Modal -->
-<div id="ticketPanel">
-    <div class="ticket-modal">
-        <div class="ticket-modal-header">
-            <h3>📋 Autotask Tickets</h3>
-            <button class="close-modal" onclick="closeTickets()">✕ Close</button>
-        </div>
-        <div class="ticket-search-wrap">
-            <input type="text" id="ticketSearch" placeholder="🔍 Search tickets..." oninput="filterTickets()">
-        </div>
-        <div class="ticket-table-wrap">
-            <table>
-                <thead><tr><th>ID</th><th>Title</th><th>Resolution</th></tr></thead>
-                <tbody id="ticketTableBody">
-                    <tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:40px;">Loading...</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+
 
 <script>
     const API = 'https://udrsechatbotfunction-afc3hhehfyf9cddb.eastus-01.azurewebsites.net/api';
@@ -451,6 +514,7 @@
 
         document.getElementById('welcome')?.remove();
         appendMessage('user', msg, null, null, null, null);
+        window._lastQuery = msg;  // Store for OpenAI fallback button
         input.value = ''; onInput();
 
         // Update conv title from first message
@@ -467,19 +531,19 @@
             sessionId  = data.session_id;
             if (conv) conv.sessionId = sessionId;
             removeTyping(tid);
-            appendMessage('bot', data.answer, data.source, data.confidence, data.ticket_title, data.ticket_id);
+            appendMessage('bot', data.answer, data.source, data.confidence, data.ticket_title, data.ticket_id, data.related_tickets || [], data.show_openai_btn || false, data.original_query || msg);
         } catch {
             removeTyping(tid);
-            appendMessage('bot', '⚠️ Cannot connect to backend.\n\nThe Azure backend may be starting up. Please wait a moment and try again.', 'error', 0, null, null);
+            appendMessage('bot', '⚠️ Cannot connect to backend.\n\nThe Azure backend may be starting up. Please wait a moment and try again.', 'error', 0, null, null, []);
         }
         saveCurrentMessages();
     }
 
     // ── Append Message ─────────────────────────────
-    function appendMessage(role, text, source, confidence, ticketTitle, ticketId) {
+    function appendMessage(role, text, source, confidence, ticketTitle, ticketId, relatedTickets, showOpenAiBtn, originalQuery) {
         const container = document.getElementById('messages');
         const wrap = document.createElement('div');
-        wrap.className = `message ${role}` + (source && role==='bot' ? ` ${source}` : '');
+        wrap.className = `message ${role}` + (source && role==='bot' && source !== 'no_match' ? ` ${source}` : '');
         const avatar = document.createElement('div');
         avatar.className = `avatar ${role}`;
         avatar.textContent = role === 'user' ? '👤' : '🤖';
@@ -488,12 +552,33 @@
         bubble.style.whiteSpace = 'pre-wrap';
         bubble.textContent = text;
 
-        if (role === 'bot' && source && source !== 'error') {
+        if (role === 'bot' && source && source !== 'error' && source !== 'no_match') {
+            // ── Source Banner at top of bubble ─────────
+            const banner = document.createElement('div');
+            banner.className = `source-banner ${source}`;
+            if (source === 'autotask') {
+                banner.innerHTML = `
+                    <span class="source-banner-icon">🎫</span>
+                    <div>
+                        <div class="source-banner-text">Answer from Autotask</div>
+                        <div class="source-banner-sub">Based on your real support ticket history</div>
+                    </div>`;
+            } else if (source === 'openai') {
+                banner.innerHTML = `
+                    <span class="source-banner-icon">🤖</span>
+                    <div>
+                        <div class="source-banner-text">Answer from OpenAI</div>
+                        <div class="source-banner-sub">Based on general IT knowledge base</div>
+                    </div>`;
+            }
+            bubble.insertBefore(banner, bubble.firstChild);
+
+            // ── Meta bar at bottom ──────────────────────
             const meta = document.createElement('div');
             meta.className = 'bubble-meta';
             const badge = document.createElement('span');
             badge.className = `badge ${source}`;
-            badge.textContent = source.toUpperCase();
+            badge.textContent = source === 'autotask' ? 'AUTOTASK' : source === 'openai' ? 'OPENAI' : source.toUpperCase();
             const barWrap = document.createElement('div');
             barWrap.className = 'conf-bar';
             const fill = document.createElement('div');
@@ -503,20 +588,111 @@
             barWrap.appendChild(fill);
             const confText = document.createElement('span');
             confText.className = 'meta-text';
-            confText.textContent = source === 'autotask' ? `${Math.round(confidence * 100)}% match` : 'fallback';
+            confText.textContent = source === 'autotask' ? `${Math.round(confidence * 100)}% match` : 'general knowledge';
             meta.appendChild(badge); meta.appendChild(barWrap); meta.appendChild(confText);
             bubble.appendChild(meta);
 
             if (source === 'autotask' && ticketId) {
-                const ref = document.createElement('div');
-                ref.className = 'ticket-ref';
-                ref.setAttribute('onclick', `openTicketDetail(${ticketId}, '${(ticketTitle||'').replace(/'/g, "\\'")}')`)
-                ref.innerHTML = `<div class="ticket-ref-label">📎 Reference Ticket</div><div class="ticket-ref-id">Ticket #${ticketId}</div><div class="ticket-ref-title">${ticketTitle||''}</div><div class="ticket-ref-hint">Check this ticket for more details.</div><div class="ticket-ref-click-hint">🔍 Click to view full details</div>`;
-                bubble.appendChild(ref);
+                // Related tickets rendered OUTSIDE bubble (added to wrap after bubble)
+
+                // no_match box rendered below outside meta block
             }
         }
+        // ── No Match → Ask Permission (OUTSIDE meta block) ──
+        if (role === 'bot' && source === 'no_match') {
+            const noMatch = document.createElement('div');
+            noMatch.className = 'no-match-box';
+
+            const msgText = document.createElement('div');
+            msgText.className = 'no-match-text';
+            msgText.innerHTML = '<div class="no-match-icon">🔍</div><strong>No match found in Autotask</strong>The question raised could not be found in our support ticket database. Would you like the bot to search the OpenAI knowledge base for an answer?';
+
+            const actions = document.createElement('div');
+            actions.className = 'no-match-actions';
+
+            const oaiBtn = document.createElement('button');
+            oaiBtn.className = 'openai-btn';
+            oaiBtn.innerHTML = '🤖 &nbsp;Proceed with OpenAI';
+
+            const loadingText = document.createElement('span');
+            loadingText.className = 'openai-btn-loading';
+            loadingText.style.display = 'none';
+            loadingText.innerHTML = '⚡ Fetching answer from OpenAI knowledge base...';
+
+            const capturedQuery = window._lastQuery || text || '';
+            oaiBtn.dataset.query = capturedQuery;
+            oaiBtn.onclick = function() {
+                const q = this.dataset.query || window._lastQuery || '';
+                if (!q) { console.error('No query captured'); return; }
+                oaiBtn.disabled = true;
+                oaiBtn.innerHTML = '⏳ &nbsp;Loading...';
+                loadingText.style.display = 'flex';
+                askOpenAI(q, sessionId, oaiBtn, noMatch);
+            };
+
+            actions.appendChild(oaiBtn);
+            actions.appendChild(loadingText);
+            noMatch.appendChild(msgText);
+            noMatch.appendChild(actions);
+            bubble.appendChild(noMatch);
+        }
+
         wrap.appendChild(avatar); wrap.appendChild(bubble);
         container.appendChild(wrap);
+
+        // ── Related Tickets Cards (outside bubble) ──
+        if (role === 'bot' && relatedTickets && relatedTickets.length > 0) {
+            const ticketsCopy = relatedTickets;
+            const outerDiv = document.createElement('div');
+            outerDiv.className = 'related-tickets-outer';
+
+            const label = document.createElement('div');
+            label.className = 'related-tickets-label';
+            label.textContent = '🎫 Here are some relatable tickets you can view:';
+            outerDiv.appendChild(label);
+
+            const scroll = document.createElement('div');
+            scroll.className = 'related-tickets-scroll';
+
+            relatedTickets.forEach((t, i) => {
+                const card = document.createElement('div');
+                card.className = 'related-ticket-card';
+
+                const idEl = document.createElement('div');
+                idEl.className = 'related-ticket-card-id';
+                idEl.textContent = 'Ticket #' + t.ticket_id;
+
+                const titleEl = document.createElement('div');
+                titleEl.className = 'related-ticket-card-title';
+                titleEl.textContent = t.title || '—';
+
+                const btn = document.createElement('button');
+                btn.className = 'related-ticket-card-btn';
+                btn.textContent = 'View';
+                // Capture ticket directly to avoid closure issue
+                btn.dataset.ticketId    = t.ticket_id;
+                btn.dataset.ticketTitle = t.title || '';
+                btn.dataset.ticketRes   = t.resolution_notes || t.description || '';
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    showTicketModal(
+                        this.dataset.ticketId,
+                        this.dataset.ticketTitle,
+                        this.dataset.ticketRes
+                    );
+                };
+
+                card.appendChild(idEl);
+                card.appendChild(titleEl);
+                card.appendChild(btn);
+                scroll.appendChild(card);
+            });
+
+            outerDiv.appendChild(scroll);
+            container.appendChild(outerDiv);
+        }
+
         container.scrollTop = container.scrollHeight;
     }
 
@@ -534,51 +710,33 @@
 
     // ── Stats ──────────────────────────────────────
     async function loadStats() {
+        function setEl(id, val) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val;
+        }
         try {
             const res  = await fetch(`${API}/stats`);
             const data = await res.json();
-            const t = data.total_tickets||'0', r = data.with_resolution||'0', s = data.last_synced?data.last_synced.split('.')[0]:'—';
-            document.getElementById('statTotal').textContent    = t;
-            document.getElementById('statResolved').textContent = r;
-            document.getElementById('statSync').textContent     = s;
-            document.getElementById('mStatTotal').textContent    = t;
-            document.getElementById('mStatResolved').textContent = r;
-            document.getElementById('mStatSync').textContent     = s;
-        } catch {
-            ['statTotal','statResolved','statSync','mStatTotal','mStatResolved','mStatSync'].forEach(id => document.getElementById(id).textContent = 'N/A');
+            const t = data.total_tickets || '0';
+            const r = data.with_resolution || '0';
+            const s = data.last_synced ? data.last_synced.split('.')[0] : '—';
+            setEl('statTotal',    t);
+            setEl('statResolved', r);
+            setEl('statSync',     s);
+            setEl('mStatTotal',   t);
+            setEl('mStatResolved',r);
+            setEl('mStatSync',    s);
+        } catch(e) {
+            console.error('Stats error:', e);
+            ['statTotal','statResolved','statSync','mStatTotal','mStatResolved','mStatSync']
+                .forEach(id => setEl(id, 'N/A'));
         }
     }
 
     // ── Tickets ────────────────────────────────────
-    async function openTickets() { document.getElementById('ticketPanel').classList.add('open'); await loadTickets(); }
-    function closeTickets() { document.getElementById('ticketPanel').classList.remove('open'); }
 
-    async function loadTickets() {
-        try {
-            const res  = await fetch(`${API}/tickets`);
-            const data = await res.json();
-            allTickets = data.tickets || [];
-            renderTickets(allTickets);
-        } catch {
-            document.getElementById('ticketTableBody').innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--orange);padding:30px;">⚠️ Cannot load tickets.</td></tr>';
-        }
-    }
 
-    function renderTickets(tickets) {
-        const tbody = document.getElementById('ticketTableBody');
-        if (!tickets.length) { tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:40px;">No tickets found.</td></tr>'; return; }
-        tbody.innerHTML = tickets.map(t => `
-            <tr>
-                <td><span class="tid-badge">#${t.ticket_id}</span></td>
-                <td style="font-weight:500;max-width:180px">${t.title||'—'}</td>
-                <td style="color:var(--text-muted);max-width:240px">${(t.resolution_notes||'').slice(0,100)}${(t.resolution_notes||'').length>100?'...':''}</td>
-            </tr>`).join('');
-    }
 
-    function filterTickets() {
-        const q = document.getElementById('ticketSearch').value.toLowerCase();
-        renderTickets(allTickets.filter(t => (t.title||'').toLowerCase().includes(q) || (t.resolution_notes||'').toLowerCase().includes(q)));
-    }
 
 
     // ── Info Modal ─────────────────────────────────
@@ -593,40 +751,241 @@
     document.getElementById('infoPanel').addEventListener('click', function(e) { if (e.target===this) closeInfo(); });
 
 
+
+    // ── Ask OpenAI (button click) ──────────────────
+    async function askOpenAI(query, sessionIdParam, btnEl, noMatchBox) {
+        console.log('askOpenAI called with query:', query);
+        if (!query || query.trim() === '') {
+            query = window._lastQuery || '';
+        }
+        if (!query) {
+            alert('Could not retrieve your question. Please type it again.');
+            return;
+        }
+        const typingId = showTyping();
+        try {
+            const res  = await fetch(`${API}/chatopenai`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: query.trim(), session_id: sessionId})
+            });
+            const data = await res.json();
+            sessionId = data.session_id || sessionId;
+            removeTyping(typingId);
+            if (noMatchBox) noMatchBox.style.display = 'none';
+            appendMessage('bot', data.answer, 'openai', 0, null, null, []);
+        } catch(e) {
+            console.error('askOpenAI error:', e);
+            removeTyping(typingId);
+            if (btnEl) {
+                btnEl.disabled = false;
+                btnEl.textContent = '✅ Proceed with OpenAI';
+            }
+            appendMessage('bot', '⚠️ Could not connect to OpenAI. Please try again.', 'error', 0, null, null, []);
+        }
+    }
+
+    // ── Tickets List Modal ─────────────────────────
+    function openTicketsList(tickets) {
+        const body = document.getElementById('ticketsListBody');
+        body.innerHTML = '';
+        tickets.forEach(t => {
+            const card = document.createElement('div');
+            card.className = 'ticket-list-card';
+            card.innerHTML = `
+                <div class="ticket-list-card-id">Ticket #${t.ticket_id}</div>
+                <div class="ticket-list-card-title">${t.title||'No title'}</div>
+                <div class="ticket-list-card-preview">${(t.resolution_notes||t.description||'No details available').slice(0,120)}...</div>
+            `;
+            card.onclick = () => {
+                closeTicketsList();
+                openTicketDetail(t.ticket_id, t.title, t.resolution_notes, t.description);
+            };
+            body.appendChild(card);
+        });
+        document.getElementById('ticketsListPanel').classList.add('open');
+    }
+
+    function closeTicketsList() {
+        document.getElementById('ticketsListPanel').classList.remove('open');
+    }
+
+    document.getElementById('ticketsListPanel').addEventListener('click', function(e) {
+        if (e.target === this) closeTicketsList();
+    });
+
+
+    // ── Related Tickets List ───────────────────────
+    let currentRelatedTickets = [];
+
+    function openTicketsList(tickets) {
+        currentRelatedTickets = tickets;
+        const body = document.getElementById('ticketsListBody');
+        body.innerHTML = tickets.map((t, i) => `
+            <div class="ticket-list-item" onclick="openTicketDetailFromList(${i})">
+                <div class="ticket-list-item-id">Ticket #${t.ticket_id}</div>
+                <div class="ticket-list-item-title">${t.title || '—'}</div>
+                <div class="ticket-list-item-preview">${(t.resolution_notes || t.description || 'No details available').slice(0, 120)}...</div>
+            </div>
+        `).join('');
+        document.getElementById('ticketsListPanel').classList.add('open');
+    }
+
+    function closeTicketsList() {
+        document.getElementById('ticketsListPanel').classList.remove('open');
+    }
+
+    function openTicketDetailFromList(index) {
+        const t = currentRelatedTickets[index];
+        if (!t) return;
+        showTicketModal(t.ticket_id, t.title, t.resolution_notes || t.description);
+    }
+
+    document.getElementById('ticketsListPanel').addEventListener('click', function(e) {
+        if (e.target === this) closeTicketsList();
+    });
+
+    // ── OpenAI Button ──────────────────────────────
+    async function askOpenAI(query, sessionId, btnEl) {
+        btnEl.disabled = true;
+        btnEl.textContent = '⏳ Loading...';
+
+        const typingId = showTyping();
+        try {
+            const res  = await fetch(`${API}/chatopenai`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: query, session_id: sessionId})
+            });
+            const data = await res.json();
+            removeTyping(typingId);
+            appendMessage('bot', data.answer, 'openai', 0, null, null, []);
+            // Hide the no-match box after OpenAI answers
+            btnEl.closest('.no-match-box').style.display = 'none';
+        } catch {
+            removeTyping(typingId);
+            btnEl.disabled = false;
+            btnEl.textContent = '🤖 OpenAI';
+        }
+    }
+
     // ── Ticket Detail Modal ────────────────────────
-    function openTicketDetail(ticketId, ticketTitle) {
+    function openTicketDetail(ticketId, ticketTitle, resolutionNotes, description) {
         document.getElementById('detailTicketId').textContent = 'Ticket #' + ticketId;
         document.getElementById('detailTicketTitle').textContent = ticketTitle || 'No title';
-        document.getElementById('detailTicketResolution').textContent = 'Loading...';
         document.getElementById('ticketDetailPanel').classList.add('open');
 
-        // Fetch ticket details from API
-        fetch(`${API}/tickets?search=${encodeURIComponent(ticketTitle || '')}`)
-            .then(r => r.json())
-            .then(data => {
-                const ticket = (data.tickets || []).find(t => t.ticket_id == ticketId);
-                if (ticket && ticket.resolution_notes) {
-                    document.getElementById('detailTicketResolution').textContent = ticket.resolution_notes;
-                } else if (ticket && ticket.description) {
-                    document.getElementById('detailTicketResolution').textContent = ticket.description;
-                } else {
-                    document.getElementById('detailTicketResolution').innerHTML = '<span class="ticket-detail-empty">No resolution notes available for this ticket.</span>';
-                }
-            })
-            .catch(() => {
-                document.getElementById('detailTicketResolution').innerHTML = '<span class="ticket-detail-empty">Could not load ticket details.</span>';
-            });
+        // Use passed data if available, otherwise fetch
+        if (resolutionNotes || description) {
+            document.getElementById('detailTicketResolution').textContent = resolutionNotes || description || 'No details available.';
+        } else {
+            document.getElementById('detailTicketResolution').textContent = 'Loading...';
+            fetch(`${API}/tickets?search=${encodeURIComponent(ticketTitle || '')}`)
+                .then(r => r.json())
+                .then(data => {
+                    const ticket = (data.tickets || []).find(t => t.ticket_id == ticketId);
+                    if (ticket && ticket.resolution_notes) {
+                        document.getElementById('detailTicketResolution').textContent = ticket.resolution_notes;
+                    } else if (ticket && ticket.description) {
+                        document.getElementById('detailTicketResolution').textContent = ticket.description;
+                    } else {
+                        document.getElementById('detailTicketResolution').innerHTML = '<span class="ticket-detail-empty">No resolution notes available.</span>';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('detailTicketResolution').innerHTML = '<span class="ticket-detail-empty">Could not load ticket details.</span>';
+                });
+        }
     }
 
     function closeTicketDetail() {
-        document.getElementById('ticketDetailPanel').classList.remove('open');
+        var panel = document.getElementById('ticketDetailPanel');
+        panel.classList.remove('open');
+        panel.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    function showTicketModal(id, title, resolution) {
+        document.getElementById('detailTicketId').textContent         = 'Ticket #' + id;
+        document.getElementById('detailTicketTitle').textContent       = title || 'No title';
+        document.getElementById('detailTicketResolution').textContent  = resolution || 'No resolution notes available.';
+        var panel = document.getElementById('ticketDetailPanel');
+        panel.style.display = 'flex';
+        panel.classList.add('open');
+        document.body.style.overflow = 'hidden';
     }
 
     document.getElementById('ticketDetailPanel').addEventListener('click', function(e) {
         if (e.target === this) closeTicketDetail();
     });
+    // Ensure panel starts hidden
+    document.getElementById('ticketDetailPanel').style.display = 'none';
 
-    document.getElementById('ticketPanel').addEventListener('click', function(e) { if (e.target===this) closeTickets(); });
+    // ── All Tickets Panel ──────────────────────────
+    let allTicketsData = [];
+
+    async function openTicketsPanel() {
+        document.getElementById('allTicketsPanel').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        if (allTicketsData.length === 0) await loadAllTickets();
+        else renderAllTickets(allTicketsData);
+    }
+
+    function closeTicketsPanel() {
+        document.getElementById('allTicketsPanel').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    async function loadAllTickets() {
+        try {
+            const res  = await fetch(`${API}/tickets?limit=500`);
+            const data = await res.json();
+            allTicketsData = data.tickets || [];
+            renderAllTickets(allTicketsData);
+        } catch {
+            document.getElementById('allTicketsBody').innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--orange);padding:30px;">⚠️ Cannot load tickets.</td></tr>';
+        }
+    }
+
+    function renderAllTickets(tickets) {
+        const tbody = document.getElementById('allTicketsBody');
+        if (!tickets.length) {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:40px;">No tickets found.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = tickets.map((t, i) => `
+            <tr style="cursor:pointer;" onclick="viewTicketFromTable(${i})">
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);">
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;color:var(--blue-light);">#${t.ticket_id}</span>
+                </td>
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);font-weight:500;max-width:220px;color:var(--text);">${t.title || '—'}</td>
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-muted);max-width:300px;">${(t.resolution_notes || '—').slice(0,100)}${(t.resolution_notes||'').length>100?'...':''}</td>
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);">
+                    <button onclick="event.stopPropagation();viewTicketFromTable(${i})" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-family:'Outfit',sans-serif;font-weight:700;cursor:pointer;">View</button>
+                </td>
+            </tr>`).join('');
+    }
+
+    function filterAllTickets() {
+        const q = document.getElementById('allTicketsSearch').value.toLowerCase();
+        const filtered = allTicketsData.filter(t =>
+            (t.title||'').toLowerCase().includes(q) ||
+            (t.resolution_notes||'').toLowerCase().includes(q) ||
+            String(t.ticket_id).includes(q)
+        );
+        renderAllTickets(filtered);
+    }
+
+    function viewTicketFromTable(index) {
+        const t = allTicketsData[index];
+        if (!t) return;
+        showTicketModal(t.ticket_id, t.title, t.resolution_notes || t.description);
+    }
+
+    document.getElementById('allTicketsPanel').addEventListener('click', function(e) {
+        if (e.target === this) closeTicketsPanel();
+    });
+
 </script>
 
 <!-- Info Modal -->
@@ -671,6 +1030,36 @@
         <div class="info-section">
             <h4>💡 Tips for best results</h4>
             <div class="info-desc">• Be specific — "laptop keyboard not working" works better than "laptop issues"<br>• Describe what happened — "WiFi was working but suddenly stopped"<br>• Mention the device or software — "Outlook not syncing on Windows 11"</div>
+        </div>
+    </div>
+</div>
+
+
+<!-- All Tickets Panel -->
+<div id="allTicketsPanel" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:20px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:860px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.5);animation:slideUp 0.3s ease;">
+        <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--surface2);flex-shrink:0;">
+            <h3 style="font-size:15px;font-weight:600;color:var(--blue-light);">📋 Autotask Tickets Database</h3>
+            <div style="display:flex;gap:8px;align-items:center;">
+                <input type="text" id="allTicketsSearch" placeholder="🔍 Search tickets..." oninput="filterAllTickets()"
+                    style="background:var(--surface3);border:1px solid var(--border);color:var(--text);padding:7px 12px;border-radius:8px;font-size:12px;outline:none;font-family:'Outfit',sans-serif;width:200px;">
+                <button onclick="closeTicketsPanel()" style="background:transparent;border:1px solid var(--border);color:var(--text-muted);width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:14px;">✕</button>
+            </div>
+        </div>
+        <div style="overflow-y:auto;flex:1;">
+            <table style="width:100%;border-collapse:collapse;font-size:12px;">
+                <thead>
+                    <tr>
+                        <th style="padding:10px 14px;text-align:left;font-weight:600;color:var(--text-muted);background:var(--surface2);border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;white-space:nowrap;">ID</th>
+                        <th style="padding:10px 14px;text-align:left;font-weight:600;color:var(--text-muted);background:var(--surface2);border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;">Title</th>
+                        <th style="padding:10px 14px;text-align:left;font-weight:600;color:var(--text-muted);background:var(--surface2);border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;">Resolution</th>
+                        <th style="padding:10px 14px;text-align:left;font-weight:600;color:var(--text-muted);background:var(--surface2);border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;white-space:nowrap;"></th>
+                    </tr>
+                </thead>
+                <tbody id="allTicketsBody">
+                    <tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:40px;">Loading tickets...</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

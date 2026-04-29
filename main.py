@@ -234,7 +234,7 @@ Follow these rules strictly:
             # Generic IT words that appear in almost every ticket
             "issue","problem","error","fix","need","support",
             "connect","connected","connecting","disconnected",
-            "device","machine","setup","setting","settings",
+            "computer","device","machine","setup","setting","settings","sync","able","using",
             "thank","trying","tried","unable","cannot","getting",
             "work","works","stopped","suddenly","still","keep","keeps",
             "new","old","one","two","three","day","time","after","before",
@@ -259,7 +259,7 @@ Follow these rules strictly:
 
         return {
             "answer":       answer,
-            "source":       "autotask" if ticket_is_relevant else "openai",
+            "source":       "autotask" if ticket_is_relevant else "no_match",
             "confidence":   round(tickets[0]["similarity"], 2) if ticket_is_relevant else 0.0,
             "ticket_title": tickets[0]["title"] if ticket_is_relevant else None,
             "ticket_id":    tickets[0]["ticket_id"] if ticket_is_relevant else None
