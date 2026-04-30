@@ -596,7 +596,7 @@ def messages(req: func.HttpRequest) -> func.HttpResponse:
     """
     import requests as http_requests
 
-    TENANT_ID = "417b5070-1e2f-47be-b6fa-bf6392bf9666"  # App Tenant ID from Azure Portal
+    TENANT_ID = os.environ.get("AZURE_TENANT_ID", "")  # Set in Azure App Settings
 
     try:
         body = req.get_json()
