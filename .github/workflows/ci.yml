@@ -48,7 +48,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
+          pip install pytest fastapi uvicorn pydantic
 
       - name: Run unit tests
         # These functions only need placeholder env vars to import main.py
@@ -101,7 +101,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
+          pip install pytest fastapi uvicorn pydantic
 
       - name: Run integration and end-to-end tests
         # Tests call the live Azure URL hardcoded in test_bot.py
@@ -146,7 +146,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-json-report
+          pip install pytest pytest-json-report fastapi uvicorn pydantic
 
       - name: Run all 30 tests with report
         run: |
