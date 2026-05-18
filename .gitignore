@@ -8,4 +8,4 @@ wwwroot/
 *.log
 .funcignore
 azure-cli-2.85.0.msi
-README.md
+
