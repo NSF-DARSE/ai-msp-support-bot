@@ -1,9 +1,0 @@
-azure-functions
-openai
-pg8000
-requests
-python-dotenv
-pydantic
-schedule
-botbuilder-core
-botbuilder-schema
